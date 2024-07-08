@@ -37,6 +37,16 @@ def login(userid, password, df):
 def login_page():
     users_df = load_users_from_excel()
 
+    hide_streamlit_style = """
+        <style>
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        .css-18e3th9 {padding-top: 0rem;}
+        .css-1d391kg {padding-top: 3.5rem;}
+        </style>
+        """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
     st.title('Login')
     userid = st.text_input('UserID')
     password = st.text_input('Password', type='password')
@@ -52,11 +62,14 @@ def login_page():
         else:
             st.error('Invalid userID or password')
 
+    st.markdown("---")
+    st.title('Sign Up')
+    signup_page()
+
 # 회원가입 페이지
 def signup_page():
     users_df = load_users_from_excel()
 
-    st.title('Sign Up')
     userid = st.text_input('New UserID')
     username = st.text_input('Username')
     password = st.text_input('New Password', type='password')
